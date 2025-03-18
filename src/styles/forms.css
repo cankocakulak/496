@@ -32,4 +32,20 @@ button {
 
 button:hover {
   background-color: #c0c0c0;
+}
+
+@keyframes blink {
+  0% { background-color: inherit; }
+  50% { background-color: #ffcccc; }
+  100% { background-color: inherit; }
+}
+
+.invalid-field {
+  animation: blink 0.5s 6; /* Blinks for 3 seconds */
+}
+
+/* Improve focus styles for tab navigation */
+input:focus, button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #3b82f6; /* ring effect using box-shadow */
 } 
