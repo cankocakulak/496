@@ -9,7 +9,7 @@ import { useScreen } from '@/contexts/ScreenContext';
 import { orderService } from '@/services/orderService';
 
 interface OrderFormProps {
-  onNextItem: () => void;
+  onNextItem: (info: PurchaserInfo) => void;
 }
 
 export const OrderForm = ({ onNextItem }: OrderFormProps) => {
@@ -92,19 +92,15 @@ export const OrderForm = ({ onNextItem }: OrderFormProps) => {
   };
 
   const handleNextItem = () => {
-    console.log('Next Item clicked in OrderForm');
-    if (!validateForm()) {
-      console.log('Validation failed:', errors);
-      return;
-    }
+    if (!validateForm()) return;
 
     if (confirm('Add another item to this order?')) {
-      console.log('Adding item, current total:', currentItem.total);
       // Calculate running total first
       const newTotal = balanceOwing + currentItem.total;
       setBalanceOwing(newTotal);
       
-      onNextItem(); // This switches to additional items form
+      // Pass purchaser info to parent
+      onNextItem(purchaserInfo);
     }
   };
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CatalogItem } from '@/models/types';
+import { CatalogItem, PurchaserInfo } from '@/models/types';
 import { CatalogItemSection } from './CatalogItemSection';
 import { useScreen } from '@/contexts/ScreenContext';
 import { useInactivityTimer } from '@/hooks/useInactivityTimer';
@@ -8,9 +8,10 @@ import { orderService } from '@/services/orderService';
 interface AdditionalItemFormProps {
   onNextItem: () => void;
   onFinish: () => void;
+  purchaserInfo: PurchaserInfo;
 }
 
-export const AdditionalItemForm = ({ onNextItem, onFinish }: AdditionalItemFormProps) => {
+export const AdditionalItemForm = ({ onNextItem, onFinish, purchaserInfo }: AdditionalItemFormProps) => {
   const { resetToMain } = useScreen();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [processing, setProcessing] = useState(false);
@@ -76,13 +77,14 @@ export const AdditionalItemForm = ({ onNextItem, onFinish }: AdditionalItemFormP
       setProcessing(true);
       try {
         await orderService.notifyShippingAndBilling({
+          purchaser: purchaserInfo,
           items: [item],
           total: balanceOwing + item.total
         });
         
         alert('Order processed successfully!');
         resetForm();
-        onFinish(); // Use the prop instead of resetToMain
+        onFinish();
       } catch (error) {
         alert(error instanceof Error ? error.message : 'An error occurred');
       } finally {

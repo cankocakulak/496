@@ -5,6 +5,8 @@ import { AdditionalItemForm } from '@/components/AdditionalItemForm';
 import { ScreenProvider } from '@/contexts/ScreenContext';
 import { MainScreen } from '@/components/MainScreen';
 import { useScreen } from '@/contexts/ScreenContext';
+import { useState } from 'react';
+import { PurchaserInfo } from '@/models/types';
 
 export default function CheapShop() {
   return (
@@ -16,15 +18,11 @@ export default function CheapShop() {
 
 function CheapShopContent() {
   const { currentScreen, setScreen } = useScreen();
+  const [purchaserInfo, setPurchaserInfo] = useState<PurchaserInfo | null>(null);
 
-  const handleNextItem = () => {
-    console.log('Switching to additional screen');
+  const handleOrderFormComplete = (info: PurchaserInfo) => {
+    setPurchaserInfo(info);
     setScreen('additional');
-  };
-
-  const handleFinish = () => {
-    console.log('Switching to main screen');
-    setScreen('main');
   };
 
   return (
@@ -32,20 +30,18 @@ function CheapShopContent() {
       <h1 className="text-2xl font-bold mb-4">Cheap Shop Catalog Store</h1>
       
       {currentScreen === 'main' && (
-        <MainScreen onStartOrder={() => {
-          console.log('Starting order');
-          setScreen('order');
-        }} />
+        <MainScreen onStartOrder={() => setScreen('order')} />
       )}
       
       {currentScreen === 'order' && (
-        <OrderForm onNextItem={handleNextItem} />
+        <OrderForm onNextItem={handleOrderFormComplete} />
       )}
       
-      {currentScreen === 'additional' && (
+      {currentScreen === 'additional' && purchaserInfo && (
         <AdditionalItemForm 
-          onNextItem={handleNextItem}
-          onFinish={handleFinish}
+          onNextItem={() => setScreen('additional')}
+          onFinish={() => setScreen('main')}
+          purchaserInfo={purchaserInfo}
         />
       )}
     </main>
