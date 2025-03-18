@@ -5,9 +5,10 @@ export interface PurchaserInfo {
     province: string;
     city: string;
     deliveryAddress: string;
-    todaysDate: Date;
+    todaysDate: string;
     creditCardNo: string;
     validationId: string;
+    [key: string]: string;
   }
   
   export interface CatalogItem {
@@ -15,6 +16,7 @@ export interface PurchaserInfo {
     quantity: number;
     costPerItem: number;
     total: number;
+    [key: string]: string | number;
   }
   
   export interface Order {

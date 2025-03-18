@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect, MouseEvent } from 'react';
-import { ShapeRegistry, ShapeType, Shape } from '@/models/shapes/ShapeRegistry';
+import { ShapeRegistry, ShapeType, Shape } from '@/models/ShapeRegistry';
 
 type Mode = ShapeType | 'select' | 'erase';
 

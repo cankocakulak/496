@@ -16,20 +16,20 @@ export const CATALOG_ITEM_FIELDS = [
     name: 'quantity', 
     label: 'Quantity:', 
     type: 'number',
-    min: 1,
+    props: { min: 1 },
     hasSpinners: true 
   },
   { 
     name: 'costPerItem', 
     label: 'Cost/Item:', 
     type: 'number',
-    step: '0.01' 
+    props: { step: '0.01' }
   },
   { 
     name: 'total', 
     label: 'Total:', 
     type: 'text',
-    readOnly: true 
+    props: { readOnly: true }
   }
 ];
 

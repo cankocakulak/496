@@ -24,7 +24,7 @@ export const CatalogItemSection = ({ item, balanceOwing, onItemChange }: Catalog
               <div className="quantity-input">
                 <input
                   type={field.type}
-                  min={field.min}
+                  min={field.props?.min}
                   value={item[field.name]}
                   onChange={(e) => {
                     const value = e.target.value;
@@ -40,7 +40,7 @@ export const CatalogItemSection = ({ item, balanceOwing, onItemChange }: Catalog
                       onItemChange({ ...item, [field.name]: value });
                     }
                   }}
-                  readOnly={field.readOnly}
+                  readOnly={field.props?.readOnly}
                 />
                 {field.hasSpinners && (
                   <div className="spinners">
@@ -52,7 +52,7 @@ export const CatalogItemSection = ({ item, balanceOwing, onItemChange }: Catalog
             ) : (
               <input
                 type={field.type}
-                step={field.step}
+                step={field.props?.step}
                 value={item[field.name]}
                 onChange={(e) => {
                   const value = e.target.value;
@@ -68,7 +68,7 @@ export const CatalogItemSection = ({ item, balanceOwing, onItemChange }: Catalog
                     onItemChange({ ...item, [field.name]: value });
                   }
                 }}
-                readOnly={field.readOnly}
+                readOnly={field.props?.readOnly}
               />
             )}
           </React.Fragment>
