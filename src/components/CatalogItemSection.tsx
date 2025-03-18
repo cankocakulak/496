@@ -42,12 +42,7 @@ export const CatalogItemSection = ({ item, balanceOwing, onItemChange }: Catalog
                   }}
                   readOnly={field.props?.readOnly}
                 />
-                {field.hasSpinners && (
-                  <div className="spinners">
-                    <button>▲</button>
-                    <button>▼</button>
-                  </div>
-                )}
+             
               </div>
             ) : (
               <input

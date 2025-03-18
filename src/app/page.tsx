@@ -7,8 +7,7 @@ export default function Home() {
         <h1 className="text-4xl font-bold">CMPE 496 Working Base</h1>
         
         <p className="text-xl max-w-2xl">
-          A simple interactive graphics editor that allows you to create, move, and erase 
-          various shapes including squares, circles, and lines.
+          Homeworks will be listed here.
         </p>
         
         <div className="mt-4">
