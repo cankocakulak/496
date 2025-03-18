@@ -6,7 +6,7 @@ import { ScreenProvider } from '@/contexts/ScreenContext';
 import { MainScreen } from '@/components/MainScreen';
 import { useScreen } from '@/contexts/ScreenContext';
 import { useState } from 'react';
-import { PurchaserInfo } from '@/models/types';
+import { PurchaserInfo, CatalogItem } from '@/models/types';
 
 export default function CheapShop() {
   return (
@@ -19,10 +19,26 @@ export default function CheapShop() {
 function CheapShopContent() {
   const { currentScreen, setScreen } = useScreen();
   const [purchaserInfo, setPurchaserInfo] = useState<PurchaserInfo | null>(null);
+  const [orderItems, setOrderItems] = useState<CatalogItem[]>([]);
+  const [totalBalance, setTotalBalance] = useState(0);
 
-  const handleOrderFormComplete = (info: PurchaserInfo) => {
+  const handleOrderFormComplete = (info: PurchaserInfo, item: CatalogItem) => {
     setPurchaserInfo(info);
+    setOrderItems([item]);
+    setTotalBalance(item.total);
     setScreen('additional');
+  };
+
+  const handleAdditionalItem = (item: CatalogItem) => {
+    setOrderItems(prev => [...prev, item]);
+    setTotalBalance(prev => prev + item.total);
+  };
+
+  const handleFinish = () => {
+    setPurchaserInfo(null);
+    setOrderItems([]);
+    setTotalBalance(0);
+    setScreen('main');
   };
 
   return (
@@ -39,9 +55,11 @@ function CheapShopContent() {
       
       {currentScreen === 'additional' && purchaserInfo && (
         <AdditionalItemForm 
-          onNextItem={() => setScreen('additional')}
-          onFinish={() => setScreen('main')}
+          onNextItem={handleAdditionalItem}
+          onFinish={handleFinish}
           purchaserInfo={purchaserInfo}
+          orderItems={orderItems}
+          totalBalance={totalBalance}
         />
       )}
     </main>

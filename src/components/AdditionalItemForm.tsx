@@ -6,12 +6,20 @@ import { useInactivityTimer } from '@/hooks/useInactivityTimer';
 import { orderService } from '@/services/orderService';
 
 interface AdditionalItemFormProps {
-  onNextItem: () => void;
+  onNextItem: (item: CatalogItem) => void;
   onFinish: () => void;
   purchaserInfo: PurchaserInfo;
+  orderItems: CatalogItem[];
+  totalBalance: number;
 }
 
-export const AdditionalItemForm = ({ onNextItem, onFinish, purchaserInfo }: AdditionalItemFormProps) => {
+export const AdditionalItemForm = ({ 
+  onNextItem, 
+  onFinish, 
+  purchaserInfo,
+  orderItems,
+  totalBalance
+}: AdditionalItemFormProps) => {
   const { resetToMain } = useScreen();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [processing, setProcessing] = useState(false);
@@ -22,8 +30,6 @@ export const AdditionalItemForm = ({ onNextItem, onFinish, purchaserInfo }: Addi
     costPerItem: 0,
     total: 0
   });
-
-  const [balanceOwing, setBalanceOwing] = useState(0);
 
   useInactivityTimer(30000, () => {
     resetForm();
@@ -47,26 +53,16 @@ export const AdditionalItemForm = ({ onNextItem, onFinish, purchaserInfo }: Addi
   };
 
   const handleNextItem = () => {
-    console.log('Next Item clicked in AdditionalItemForm');
-    if (!validateForm()) {
-      console.log('Validation failed:', errors);
-      return;
-    }
+    if (!validateForm()) return;
 
     if (confirm('Add another item to this order?')) {
-      console.log('Adding item, current total:', item.total);
-      // Add current item to balance
-      const newTotal = balanceOwing + item.total;
-      setBalanceOwing(newTotal);
-      
+      onNextItem(item);
       setItem({
         itemNumber: '',
         quantity: 1,
         costPerItem: 0,
         total: 0
       });
-
-      onNextItem();
     }
   };
 
@@ -78,12 +74,11 @@ export const AdditionalItemForm = ({ onNextItem, onFinish, purchaserInfo }: Addi
       try {
         await orderService.notifyShippingAndBilling({
           purchaser: purchaserInfo,
-          items: [item],
-          total: balanceOwing + item.total
+          items: [...orderItems, item],
+          total: totalBalance + item.total
         });
         
         alert('Order processed successfully!');
-        resetForm();
         onFinish();
       } catch (error) {
         alert(error instanceof Error ? error.message : 'An error occurred');
@@ -100,7 +95,6 @@ export const AdditionalItemForm = ({ onNextItem, onFinish, purchaserInfo }: Addi
       costPerItem: 0,
       total: 0
     });
-    setBalanceOwing(0);
   };
 
   const handleItemChange = (field: keyof CatalogItem, value: string | number) => {
@@ -122,10 +116,25 @@ export const AdditionalItemForm = ({ onNextItem, onFinish, purchaserInfo }: Addi
         <h2 className="text-2xl font-semibold text-gray-800">Additional Item</h2>
       </div>
 
+      {/* Show previous items */}
+      <div className="mb-6">
+        <h3 className="text-lg font-medium mb-2">Current Order Items:</h3>
+        <div className="space-y-2">
+          {orderItems.map((orderItem, index) => (
+            <div key={index} className="bg-gray-50 p-3 rounded">
+              <p>Item #{orderItem.itemNumber}</p>
+              <p>Quantity: {orderItem.quantity}</p>
+              <p>Cost: ${orderItem.costPerItem.toFixed(2)}</p>
+              <p>Total: ${orderItem.total.toFixed(2)}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="bg-gray-50 rounded-lg p-6 mb-6">
         <CatalogItemSection 
           item={item}
-          balanceOwing={balanceOwing}
+          balanceOwing={totalBalance}
           onItemChange={handleItemChange}
           errors={errors}
         />
@@ -134,7 +143,7 @@ export const AdditionalItemForm = ({ onNextItem, onFinish, purchaserInfo }: Addi
       <div className="flex justify-end space-x-4">
         <button 
           type="button"
-          onClick={() => handleNextItem()}
+          onClick={handleNextItem}
           disabled={processing}
           className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
         >
@@ -142,7 +151,7 @@ export const AdditionalItemForm = ({ onNextItem, onFinish, purchaserInfo }: Addi
         </button>
         <button 
           type="button"
-          onClick={() => handleTriggerInvoice()}
+          onClick={handleTriggerInvoice}
           disabled={processing}
           className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
         >
