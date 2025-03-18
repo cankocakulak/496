@@ -20,7 +20,8 @@ Features:
 - Real-time validation
 - Automatic total calculation
 - 30-second inactivity timeout
-- Error highlighting with messages
+- Blinking error fields (3-second duration)
+- Inline error messages
 - Processing state handling
 
 ### AdditionalItemForm
@@ -41,7 +42,8 @@ Features:
 - Real-time validation
 - Automatic total calculation
 - 30-second inactivity timeout
-- Error highlighting with messages
+- Blinking error fields (3-second duration)
+- Inline error messages
 
 ### PurchaserInfoSection
 Reusable purchaser information form.
@@ -54,7 +56,7 @@ Props:
 Features:
 - Postal code format validation (A1A 1A1)
 - Field-specific error messages
-- Visual error indicators
+- Blinking error indicators
 - Tabbed navigation support
 
 ### CatalogItemSection
@@ -70,4 +72,5 @@ Features:
 - Real-time total calculation
 - Numeric input validation
 - Running balance display
-- Field-specific error messages 
+- Field-specific error messages
+- Blinking error indicators 

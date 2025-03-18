@@ -1,7 +1,7 @@
 # Cheap Shop Design Portfolio
 
 ## Overview
-A modern web-based implementation of a catalog shopping system that replaces traditional paper-based ordering, featuring real-time validation and error handling.
+A modern web-based implementation of a catalog shopping system that replaces traditional paper-based ordering, featuring real-time validation, blinking error indicators, and automatic error clearing.
 
 ## Design Goals
 1. Simplify order entry process
@@ -18,8 +18,9 @@ A modern web-based implementation of a catalog shopping system that replaces tra
 4. Tailwind CSS for styling
 5. Real-time validation
 6. Automatic calculations
-7. Error handling and feedback
-8. Inactivity timeout management
+7. Blinking error indicators
+8. Automatic error clearing
+9. Inactivity timeout management
 
 ## Shopping Scenarios
 
@@ -58,15 +59,16 @@ A modern web-based implementation of a catalog shopping system that replaces tra
 
 2. Clerk enters first item:
    - Enters postal code as "L5G5H7" (incorrect format)
-   - System shows error: "Format should be: A1A 1A1"
+   - Field blinks red with error message: "Format should be: A1A 1A1"
+   - Error clears after 3 seconds
    - Clerk corrects to "L5G 5H7"
    
 3. Continues with item entry:
    - Enters item number "B789"
    - Accidentally enters quantity as "0"
-   - System shows error: "Quantity must be at least 1"
+   - Field blinks red with error message: "Quantity must be at least 1"
    - Enters cost as "-199.99"
-   - System shows error: "Cost must be greater than 0"
+   - Field blinks red with error message: "Cost must be greater than 0"
    
 4. Clerk corrects entries:
    - Updates quantity to "1"
@@ -95,14 +97,15 @@ A modern web-based implementation of a catalog shopping system that replaces tra
    - Returns to main screen
 
 Key Validation Features Demonstrated:
-- Postal code format validation
-- Quantity minimum value check
-- Cost positive value check
+- Postal code format validation with blinking indicators
+- Quantity minimum value check with visual feedback
+- Cost positive value check with error highlighting
 - Inactivity timeout warning
 - Running total accuracy
 - Required field validation
 - Processing state indication
 - Confirmation dialogs
+- Automatic error clearing
 
 ## Security Features
 1. 30-second inactivity timeout
@@ -112,10 +115,11 @@ Key Validation Features Demonstrated:
 
 ## Error Handling
 1. Real-time field validation
-2. Visual error indicators
-3. Clear error messages
+2. Blinking error indicators (3-second duration)
+3. Inline error messages
 4. Format-specific validation (e.g., postal codes)
 5. Numeric input validation
+6. Automatic error clearing
 
 ## User Experience Enhancements
 1. Automatic total calculations
@@ -123,7 +127,8 @@ Key Validation Features Demonstrated:
 3. Processing state indicators
 4. Confirmation dialogs
 5. Field-specific error messages
-6. Visual feedback for invalid fields
+6. Blinking error indicators
+7. Automatic error clearing
 
 ## Future Enhancements
 1. Inventory integration
