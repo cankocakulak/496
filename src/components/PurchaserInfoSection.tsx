@@ -5,13 +5,13 @@ import { PURCHASER_FIELDS } from '@/models/formFields';
 interface PurchaserInfoSectionProps {
   purchaserInfo: PurchaserInfo;
   onPurchaserInfoChange: (info: PurchaserInfo) => void;
-  invalidFields: string[];
+  errors: Record<string, string>;
 }
 
 export const PurchaserInfoSection = ({
   purchaserInfo,
   onPurchaserInfoChange,
-  invalidFields
+  errors
 }: PurchaserInfoSectionProps) => {
   return (
     <section>
@@ -29,7 +29,7 @@ export const PurchaserInfoSection = ({
               tabIndex={index + 1}
               type={field.type}
               className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                invalidFields.includes(field.name) ? 'invalid-field' : ''
+                errors[field.name] ? 'border-red-500' : ''
               }`}
               value={purchaserInfo[field.name]}
               onChange={(e) => onPurchaserInfoChange({
@@ -37,6 +37,9 @@ export const PurchaserInfoSection = ({
                 [field.name]: e.target.value
               })}
             />
+            {errors[field.name] && (
+              <p className="text-red-500 text-sm mt-1">{errors[field.name]}</p>
+            )}
           </div>
         ))}
       </div>

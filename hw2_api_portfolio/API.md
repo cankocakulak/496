@@ -13,15 +13,35 @@ State:
 - purchaserInfo: PurchaserInfo
 - currentItem: CatalogItem
 - balanceOwing: number
+- errors: Record<string, string>
+- processing: boolean
+
+Features:
+- Real-time validation
+- Automatic total calculation
+- 30-second inactivity timeout
+- Error highlighting with messages
+- Processing state handling
 
 ### AdditionalItemForm
 Secondary item entry dialog.
 
-Props: None
+Props:
+- onNextItem: () => void
+- onFinish: () => void
 
 State:
 - item: CatalogItem
 - balanceOwing: number
+- errors: Record<string, string>
+- processing: boolean
+
+Features:
+- Maintains running total
+- Real-time validation
+- Automatic total calculation
+- 30-second inactivity timeout
+- Error highlighting with messages
 
 ### PurchaserInfoSection
 Reusable purchaser information form.
@@ -29,6 +49,13 @@ Reusable purchaser information form.
 Props:
 - purchaserInfo: PurchaserInfo
 - onPurchaserInfoChange: (info: PurchaserInfo) => void
+- errors: Record<string, string>
+
+Features:
+- Postal code format validation (A1A 1A1)
+- Field-specific error messages
+- Visual error indicators
+- Tabbed navigation support
 
 ### CatalogItemSection
 Reusable catalog item form.
@@ -36,4 +63,11 @@ Reusable catalog item form.
 Props:
 - item: CatalogItem
 - balanceOwing: number
-- onItemChange: (item: CatalogItem) => void 
+- onItemChange: (field: keyof CatalogItem, value: string | number) => void
+- errors: Record<string, string>
+
+Features:
+- Real-time total calculation
+- Numeric input validation
+- Running balance display
+- Field-specific error messages 
