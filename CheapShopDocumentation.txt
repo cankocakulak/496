@@ -1,0 +1,85 @@
+# Cheap Shop Catalog System Portfolio
+
+## Project Overview
+A modern web-based implementation of a catalog shopping system, designed to replace paper-based ordering systems in retail environments.
+
+## Technical Implementation
+- React/Next.js for component architecture
+- TypeScript for type safety
+- CSS Modules for styling
+- State management using React hooks
+
+## Key Features
+1. Two-stage order entry process
+2. Real-time total calculation
+3. Form validation
+4. Order confirmation system
+
+## User Scenarios
+
+### Scenario 1: Single Item Purchase
+1. Customer finds item in catalog (e.g., Lamp #A123)
+2. Clerk enters customer details
+3. Enters item #A123, quantity 1, price $50
+4. Clicks "Trigger Invoice"
+5. Total: $50
+6. Order processed
+
+### Scenario 2: Multiple Item Purchase
+1. Customer selects multiple items:
+   - Chair #B456 ($100)
+   - Table #C789 ($200)
+2. Clerk enters customer details
+3. Enters first item
+4. Clicks "Next Catalog Item"
+5. Enters second item
+6. Clicks "Trigger Invoice"
+7. Total: $300
+8. Order processed
+
+## Design Decisions
+1. Two-dialog approach matches existing workflow
+2. Confirmation dialogs prevent errors
+3. Real-time calculations improve accuracy
+4. Form validation ensures data quality
+
+## Future Enhancements
+1. Barcode scanner integration
+2. Inventory management
+3. Customer history tracking
+4. Digital catalog integration
+
+# Cheap Shop Catalog System API Documentation
+
+## Components
+
+### OrderForm
+Primary order entry interface.
+
+Props:
+- None
+
+State:
+- purchaserInfo: Customer details
+- currentItem: Current catalog item
+- balanceOwing: Running total
+
+Methods:
+- handleNextItem(): Opens additional item dialog
+- handleInvoice(): Processes final invoice
+- calculateTotal(): Updates running total
+
+### AdditionalItemForm
+Secondary item entry interface.
+
+Props:
+- onAddItem: Callback for new items
+- onComplete: Callback for order completion
+
+State:
+- itemDetails: Current item information
+- balanceOwing: Updated running total
+
+Methods:
+- handleAddItem(): Adds item to order
+- handleComplete(): Finalizes order

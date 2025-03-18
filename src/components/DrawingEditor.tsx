@@ -152,7 +152,27 @@ const DrawingEditor = () => {
         })
       );
       setLastPoint({ x, y });
+    } else if (isDrawing && mode in ShapeRegistry) {
+      // Preview the shape being drawn
+      const ctx = canvasRef.current.getContext('2d');
+      if (!ctx) return;
+      
+      // Redraw existing shapes
+      redrawCanvas();
+      
+      // Draw preview shape
+      const config = ShapeRegistry[mode as ShapeType];
+      const previewShape = config.create(
+        'preview',
+        startPoint.x,
+        startPoint.y,
+        x,
+        y
+      );
+      config.render(ctx, previewShape);
     }
+    
+    setLastPoint({ x, y });
   };
 
   // Handle mouse up
