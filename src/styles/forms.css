@@ -35,13 +35,20 @@ button:hover {
 }
 
 @keyframes blink {
-  0% { background-color: inherit; }
-  50% { background-color: #ffcccc; }
-  100% { background-color: inherit; }
+  0% { border-color: #ef4444; }
+  50% { border-color: transparent; }
+  100% { border-color: #ef4444; }
 }
 
-.invalid-field {
-  animation: blink 0.5s 6; /* Blinks for 3 seconds */
+.error {
+  border-color: #ef4444;
+  animation: blink 1s infinite;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 }
 
 /* Improve focus styles for tab navigation */

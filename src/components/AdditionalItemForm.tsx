@@ -39,14 +39,26 @@ export const AdditionalItemForm = ({
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
-    if (!item.itemNumber) newErrors.itemNumber = 'Item number is required';
-    if (item.quantity < 1) newErrors.quantity = 'Quantity must be at least 1';
-    if (item.costPerItem <= 0) newErrors.costPerItem = 'Cost must be greater than 0';
+    if (!item.itemNumber.trim()) {
+      newErrors.itemNumber = 'Item number is required';
+    }
+    if (item.quantity < 1) {
+      newErrors.quantity = 'Quantity must be at least 1';
+    }
+    if (item.costPerItem <= 0) {
+      newErrors.costPerItem = 'Cost must be greater than 0';
+    }
+    if (item.total <= 0) {
+      newErrors.total = 'Total must be greater than 0';
+    }
 
     setErrors(newErrors);
 
+    // If there are errors, show them and set a timeout to clear them
     if (Object.keys(newErrors).length > 0) {
-      setTimeout(() => setErrors({}), 3000);
+      setTimeout(() => {
+        setErrors({});
+      }, 3000);
       return false;
     }
     return true;

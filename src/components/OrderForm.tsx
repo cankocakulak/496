@@ -79,12 +79,11 @@ export const OrderForm = ({ onNextItem }: OrderFormProps) => {
 
     setErrors(newErrors);
 
-    // If there are errors, show an alert with all error messages
+    // If there are errors, show them and set a timeout to clear them
     if (Object.keys(newErrors).length > 0) {
-      const errorMessage = Object.entries(newErrors)
-        .map(([field, message]) => `${field}: ${message}`)
-        .join('\n');
-      alert('Please fix the following errors:\n\n' + errorMessage);
+      setTimeout(() => {
+        setErrors({});
+      }, 3000);
       return false;
     }
 
