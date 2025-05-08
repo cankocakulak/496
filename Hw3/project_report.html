@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game - Project Report</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        section {
+            margin-bottom: 40px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        .screenshot {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        
+        .hci-table tr td:first-child {
+            font-weight: bold;
+            width: 200px;
+        }
+        
+        .feature-table tr td:first-child {
+            font-weight: bold;
+            width: 150px;
+        }
+        
+        .prompt {
+            background-color: #f7f7f7;
+            border-left: 4px solid #3498db;
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Snake Game - Project Report</h1>
+    
+    <section id="app-description">
+        <h2>1. Application Description</h2>
+        <p>
+            This project is an implementation of the classic Snake game as a single HTML page web application with JavaScript. 
+            The Snake game is a classic arcade game where players control a snake that moves around a grid, eating food to grow longer 
+            while avoiding collisions with walls and itself. This implementation features modern design, responsive controls, and 
+            additional gameplay features to enhance the user experience.
+        </p>
+        <p>
+            The game offers two difficulty levels:
+        </p>
+        <ul>
+            <li><strong>Easy:</strong> Moderate speed with 2 points awarded per food item</li>
+            <li><strong>Hard:</strong> Faster speed with obstacles, 3 points per food item, and increasing challenge as obstacles appear when food is consumed</li>
+        </ul>
+        <p>
+            The game is designed to be intuitive, responsive, and accessible for users of various skill levels and devices. Special 
+            attention has been paid to applying HCI (Human-Computer Interaction) principles to create an engaging and user-friendly experience.
+        </p>
+    </section>
+    
+    <section id="design-implementation">
+        <h2>2. Design and Implementation</h2>
+        <p>
+            The Snake game was designed with a focus on simplicity and responsiveness. The key design decisions and implementation approaches are:
+        </p>
+        
+        <h3>Design Approach</h3>
+        <ul>
+            <li><strong>Canvas-based rendering:</strong> The game uses HTML5 Canvas for smooth graphics rendering</li>
+            <li><strong>Responsive design:</strong> Adapts to different screen sizes with CSS media queries</li>
+            <li><strong>Minimalist UI:</strong> Clean, distraction-free interface with important information clearly visible</li>
+            <li><strong>Color psychology:</strong> Used green for the snake (representing growth), red for food (representing rewards), and purple for obstacles (representing danger)</li>
+            <li><strong>Feedback mechanisms:</strong> Clear visual and interactive feedback for user actions</li>
+        </ul>
+        
+        <h3>Implementation Details</h3>
+        <ul>
+            <li><strong>Game loop:</strong> Uses <code>setTimeout</code> for game tick control with variable speeds based on difficulty</li>
+            <li><strong>State management:</strong> Tracks game state (running, paused, game over) with appropriate UI updates</li>
+            <li><strong>Collision detection:</strong> Checks for collisions with walls, snake body, and obstacles</li>
+            <li><strong>Touch controls:</strong> Implemented swipe gestures for mobile users</li>
+            <li><strong>Local storage:</strong> Persists high score between sessions using browser's localStorage API</li>
+            <li><strong>Dynamic obstacle generation:</strong> Intelligent placement algorithm for obstacles in hard mode</li>
+        </ul>
+    </section>
+    
+    <section id="libraries-tools">
+        <h2>3. Libraries and Tools Used</h2>
+        <p>
+            The Snake game was developed as a standalone web application using vanilla HTML, CSS, and JavaScript without external libraries. 
+            This approach keeps the application lightweight and dependency-free.
+        </p>
+        
+        <table>
+            <tr>
+                <th>Technology/Tool</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td>HTML5</td>
+                <td>Structure of the web page</td>
+            </tr>
+            <tr>
+                <td>CSS3</td>
+                <td>Styling, responsive design, and visual effects</td>
+            </tr>
+            <tr>
+                <td>JavaScript (ES6+)</td>
+                <td>Game logic, event handling, and state management</td>
+            </tr>
+            <tr>
+                <td>HTML5 Canvas API</td>
+                <td>Rendering the game elements (snake, food, obstacles, grid)</td>
+            </tr>
+            <tr>
+                <td>LocalStorage API</td>
+                <td>Persisting high score between game sessions</td>
+            </tr>
+            <tr>
+                <td>Touch Events API</td>
+                <td>Implementing touch controls for mobile devices</td>
+            </tr>
+            <tr>
+                <td>CSS Media Queries</td>
+                <td>Creating a responsive design that adapts to different screen sizes</td>
+            </tr>
+        </table>
+        
+        <p>
+            No external libraries or frameworks were used in order to:
+        </p>
+        <ul>
+            <li>Minimize loading time and application size</li>
+            <li>Avoid unnecessary dependencies</li>
+            <li>Demonstrate core web development skills</li>
+            <li>Maintain full control over all aspects of the game</li>
+        </ul>
+    </section>
+    
+    <section id="prompts">
+        <h2>4. ChatGPT Prompts Used</h2>
+        
+        <div class="prompt">
+            "Please select an application: [...] and develop a dynamic single html page (with javascript code) web interface for your selected (or
+            proposed) application using ChatGPT (or Claude, Grok, DeepSeek, Qwen etc.). When developing
+            your application, please apply HCI principles to make your interface more intuitive, user-friendly,
+            accessible, and efficient for a wide range of users."
+        </div>
+        
+        <div class="prompt">
+            "can we create a simple game like snake?"
+        </div>
+        
+        <div class="prompt">
+            "when i press play again the dot place changes but i cant start playing actually, i always see play again button"
+        </div>
+        
+        <div class="prompt">
+            "ok thanks, now is this game efficient for a wide range of users? if not is there something we can do to improve it? if not you dont have to change stuff"
+        </div>
+        
+        <div class="prompt">
+            "good, but on hard mode i need to be able to gain more points since it is faster. also on hard mode maybe you can add some obstacles on the board for making it harder"
+        </div>
+        
+        <div class="prompt">
+            "ok now this way easy game is too easy and slow, maybe remove that option and only keep medium and hard options. of course you can change medium name to easy"
+        </div>
+    </section>
+    
+    <section id="hci-principles">
+        <h2>5. HCI Principles Applied</h2>
+        
+        <table class="hci-table">
+            <tr>
+                <th>HCI Principle</th>
+                <th>Implementation in Snake Game</th>
+            </tr>
+            <tr>
+                <td>Visibility of System Status</td>
+                <td>
+                    <ul>
+                        <li>Real-time score display and high score tracking</li>
+                        <li>Clear "Game Over" state with final score</li>
+                        <li>"GAME PAUSED" indicator when game is paused</li>
+                        <li>Visual distinction between snake head and body</li>
+                        <li>Pause button text changes between "Pause" and "Resume" to reflect current state</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Match Between System and Real World</td>
+                <td>
+                    <ul>
+                        <li>Intuitive controls matching directional expectations (arrow keys, WASD)</li>
+                        <li>Swipe gestures on mobile that match the intended direction of movement</li>
+                        <li>Snake movement and growth mechanics that match the real-world understanding of how a snake moves</li>
+                        <li>Color coding matching real-world associations (green snake, red food, purple obstacles)</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>User Control and Freedom</td>
+                <td>
+                    <ul>
+                        <li>Ability to pause and resume the game at any time</li>
+                        <li>Clear "Play Again" option after game over</li>
+                        <li>Difficulty selection to match player skill level</li>
+                        <li>Multiple control schemes (arrow keys, WASD, touch) giving users choice</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Consistency and Standards</td>
+                <td>
+                    <ul>
+                        <li>Consistent visual design throughout the application</li>
+                        <li>Standard game controls familiar to users (arrow keys)</li>
+                        <li>Consistent button styling and interactive elements</li>
+                        <li>Game mechanics consistent with typical snake game expectations</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Error Prevention</td>
+                <td>
+                    <ul>
+                        <li>Prevention of 180-degree turns (cannot immediately reverse direction)</li>
+                        <li>Smart obstacle placement to prevent impossible game situations</li>
+                        <li>Buffer zone around the snake's head when placing new obstacles</li>
+                        <li>Prevention of food or obstacles spawning on occupied spaces</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Recognition Rather Than Recall</td>
+                <td>
+                    <ul>
+                        <li>On-screen instructions explaining controls</li>
+                        <li>Visual differentiation between snake, food, and obstacles</li>
+                        <li>Clear labels on all interactive elements</li>
+                        <li>Keyboard controls visually represented with key symbols</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Flexibility and Efficiency of Use</td>
+                <td>
+                    <ul>
+                        <li>Multiple control schemes (keyboard, touch)</li>
+                        <li>Difficulty options catering to different skill levels</li>
+                        <li>Both button and keyboard shortcut for pausing</li>
+                        <li>Responsive design working across various devices</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Aesthetic and Minimalist Design</td>
+                <td>
+                    <ul>
+                        <li>Clean, distraction-free game interface</li>
+                        <li>Only relevant game information displayed</li>
+                        <li>Visually pleasing color scheme</li>
+                        <li>Clear visual hierarchy of information</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Help Users Recognize, Diagnose, and Recover from Errors</td>
+                <td>
+                    <ul>
+                        <li>Clear game over screen with score feedback</li>
+                        <li>Obvious play again option</li>
+                        <li>Visual feedback when collisions occur</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Help and Documentation</td>
+                <td>
+                    <ul>
+                        <li>Simple instructions provided directly on screen</li>
+                        <li>Visual representations of keyboard controls</li>
+                        <li>Self-explanatory UI elements</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Accessibility</td>
+                <td>
+                    <ul>
+                        <li>High contrast colors for visibility</li>
+                        <li>Multiple control options (keyboard, touch)</li>
+                        <li>Appropriate ARIA labels on interactive elements</li>
+                        <li>Focus indicators for keyboard navigation</li>
+                        <li>Responsive design supporting different screen sizes</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </section>
+    
+    <section id="features">
+        <h2>6. Current Features and Implementation</h2>
+        
+        <table class="feature-table">
+            <tr>
+                <th>Feature</th>
+                <th>Implementation Details</th>
+            </tr>
+            <tr>
+                <td>Core Gameplay</td>
+                <td>
+                    <ul>
+                        <li>Snake movement with growth mechanics when food is eaten</li>
+                        <li>Collision detection for walls, snake body, and obstacles</li>
+                        <li>Food randomly generated in valid positions</li>
+                        <li>Game-over conditions and restart functionality</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Difficulty Levels</td>
+                <td>
+                    <ul>
+                        <li>Easy mode: Standard speed, 2 points per food</li>
+                        <li>Hard mode: Faster speed, obstacles, 3 points per food</li>
+                        <li>Dynamic difficulty adjustment by adding obstacles as the player progresses in hard mode</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Controls</td>
+                <td>
+                    <ul>
+                        <li>Keyboard controls (arrow keys and WASD)</li>
+                        <li>Touch controls with swipe detection for mobile devices</li>
+                        <li>UI buttons for pause/resume functionality</li>
+                        <li>Prevention of 180-degree turns for more realistic gameplay</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Scoring System</td>
+                <td>
+                    <ul>
+                        <li>Difficulty-based scoring (more points in harder difficulties)</li>
+                        <li>High score tracking with localStorage persistence</li>
+                        <li>Current and final score displays</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Game States</td>
+                <td>
+                    <ul>
+                        <li>Running: Active gameplay</li>
+                        <li>Paused: Game loop continues but updates are suspended</li>
+                        <li>Game Over: Display score and restart option</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Responsive Design</td>
+                <td>
+                    <ul>
+                        <li>Adapts to different screen sizes with CSS media queries</li>
+                        <li>Appropriately sized UI elements for both desktop and mobile</li>
+                        <li>Touch-friendly controls for mobile devices</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Visual Design</td>
+                <td>
+                    <ul>
+                        <li>Clean, modern aesthetic with pleasing color scheme</li>
+                        <li>Visual differentiation between game elements</li>
+                        <li>Subtle grid background for spatial awareness</li>
+                        <li>Clear visual feedback for game states</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Obstacles (Hard Mode)</td>
+                <td>
+                    <ul>
+                        <li>Intelligent obstacle placement algorithm</li>
+                        <li>Buffer zones to prevent unfair situations</li>
+                        <li>Progressive difficulty with obstacles added during gameplay</li>
+                        <li>Maximum of 5 obstacles to maintain game balance</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Pause Functionality</td>
+                <td>
+                    <ul>
+                        <li>Pause/resume with space bar or dedicated button</li>
+                        <li>Visual paused state indicator</li>
+                        <li>Button text updates to reflect current state</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </section>
+    
+    <section id="screenshots">
+        <h2>7. Screenshots</h2>
+        <p>
+            <i>Note: To complete this section, take screenshots of your game in various states (starting screen, during gameplay, 
+            paused state, game over screen, hard mode with obstacles, etc.) and include them here in your final report.</i>
+        </p>
+        
+        <p>
+            <strong>Game Start (Easy Mode)</strong><br>
+            [Insert screenshot of the initial game state in easy mode]
+        </p>
+        
+        <p>
+            <strong>Gameplay (Easy Mode)</strong><br>
+            [Insert screenshot of gameplay in easy mode]
+        </p>
+        
+        <p>
+            <strong>Hard Mode with Obstacles</strong><br>
+            [Insert screenshot of hard mode with obstacles]
+        </p>
+        
+        <p>
+            <strong>Paused Game</strong><br>
+            [Insert screenshot of the game in a paused state]
+        </p>
+        
+        <p>
+            <strong>Game Over Screen</strong><br>
+            [Insert screenshot of the game over screen]
+        </p>
+        
+        <p>
+            <strong>Mobile View</strong><br>
+            [Insert screenshot of the game on a mobile device or narrow viewport]
+        </p>
+    </section>
+    
+    <section id="conclusion">
+        <h2>8. Conclusion</h2>
+        <p>
+            The Snake game demonstrates the application of HCI principles to create an engaging, accessible, and user-friendly 
+            web application. By focusing on intuitive controls, clear feedback, error prevention, and responsive design, the game 
+            provides an enjoyable experience for users across different devices and skill levels.
+        </p>
+        <p>
+            Key achievements of this project include:
+        </p>
+        <ul>
+            <li>Implementing classic Snake gameplay with modern features and enhancements</li>
+            <li>Creating a fully responsive design that works on both desktop and mobile devices</li>
+            <li>Applying HCI principles systematically to improve user experience</li>
+            <li>Balancing challenge and accessibility through difficulty options</li>
+            <li>Developing the entire game as a single HTML file with vanilla JavaScript and no external dependencies</li>
+        </ul>
+        <p>
+            This project demonstrates how even a simple game can be enhanced through careful attention to HCI principles, 
+            resulting in a more engaging and accessible experience for users.
+        </p>
+    </section>
+</body>
+</html> 
